@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'apis', # added this line to include the apis app in the project
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
