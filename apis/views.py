@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
 from .models import Product, Shelf
 from .serializers import ProductSerializer, ShelfSerializer
 
@@ -11,3 +13,8 @@ class ProductViewSet(viewsets.ModelViewSet):
 class ShelfViewSet(viewsets.ModelViewSet):
     queryset = Shelf.objects.all()
     serializer_class = ShelfSerializer
+
+    @action(detail=True, methods=['get'])
+    def check_weight(self, request, pk=None):
+        shelf = self.get_object()
+        return Response({'weight': shelf.check_weight()})

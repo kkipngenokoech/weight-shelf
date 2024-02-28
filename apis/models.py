@@ -21,6 +21,12 @@ class Shelf (models.Model):
 
     def total_current_weight(self):
         return sum(product.weight for product in self.products.all())
+    
+    def check_weight(self):
+        if self.total_current_weight() > self.weight_capacity:
+            return "Alert: Shelf is over capacity by " + str(self.total_current_weight() - self.weight_capacity) + " kg."
+        return "Shelf is within capacity, current weight is " + str(self.total_current_weight()) + " kg out of " + str(self.weight_capacity) + " kg."
 
     def __str__(self):
         return self.name
+    
